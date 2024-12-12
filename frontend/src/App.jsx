@@ -5,6 +5,9 @@ import Home from './Home';
 import NavBar from './NavBar';
 import Login from './Login'; 
 import Footer from './Footer'; 
+import MyProfile from './MyProfile'; 
+
+
 
 
 
@@ -20,7 +23,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/navbar" element={<NavBar />} /> 
-       
+        <Route path="/MyProfile" element={<MyProfile />} /> 
+        
       </Routes>
       <Footer/>
     </Router>

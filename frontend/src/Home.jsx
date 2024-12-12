@@ -9,16 +9,23 @@ function Home() {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleAuth = async () => {
-    const response = await fetch('http://localhost:3001/checkauth', {
-      method: 'GET',
-      headers: {
-        'access-token': myLocalStoredToken,
-      },
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch('http://localhost:3001/checkauth', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${myLocalStoredToken}`, // Utilisation correcte de l'en-tête Authorization
+        },
+      });
+      const data = await response.json();
 
-    if (response.ok && data === "Not Authenticated") {
-      navigate('/');
+      if (response.ok) {
+        console.log('User authenticated:', data);
+      } else {
+        console.error('Failed to authenticate:', data);
+        navigate('/'); // Redirige vers la page de login si l'authentification échoue
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
@@ -34,13 +41,13 @@ function Home() {
     };
 
     fetchProducts();
-  }, []);
+    handleAuth(); // Vérifie l'authentification au montage du composant
+  }, [navigate]); // Ajout de navigate comme dépendance
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">SneaKR</h1>
       <SearchBar setSearchResults={setSearchResults} />
-      <button onClick={handleAuth} className="btn btn-primary mb-4">CheckAuth</button>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {(searchResults.length > 0 ? searchResults : products).map(product => (

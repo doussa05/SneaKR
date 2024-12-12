@@ -4,7 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken"); 
 const bodyParser = require('body-parser');
 const PORT = 3001;
-const verifyJwt = require('./middlewares/verifyJwt.js')
+const verifyJwt = require('./middlewares/verifyJwt.js');
 const app = express();
 
 app.use(cors());
@@ -69,7 +69,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-
+// route la bare de recherche
 app.get('/search', (req, res) => {
   const searchTerm = req.query.term;
   const sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
@@ -82,7 +82,7 @@ app.get('/search', (req, res) => {
     return res.status(200).json(data);
   });
 });
-
+// routes des produits
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM products"; 
   db.query(sql, (err, data) => {

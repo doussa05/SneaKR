@@ -13,7 +13,7 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0">
-            <Link className="text-3xl font-bold">Anisus</Link>
+            <Link to="/" className="text-3xl font-bold">Anisus</Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/home" className="hover:text-gray-400">Home</Link>
