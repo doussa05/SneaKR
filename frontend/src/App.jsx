@@ -5,6 +5,9 @@ import Home from './Home';
 import NavBar from './NavBar';
 import Login from './Login'; 
 import Footer from './Footer'; 
+
+
+
 import './App.css';
 
 function App() {
@@ -17,6 +20,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/navbar" element={<NavBar />} /> 
+       
       </Routes>
       <Footer/>
     </Router>

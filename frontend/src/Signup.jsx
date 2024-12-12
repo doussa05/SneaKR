@@ -25,11 +25,12 @@ function Signup() {
             name: values.name,
             email: values.email,
             password: values.password,
+            
           }),
         });
         
         const data = await response.json();
-        console.log(data);
+        console.log(data)
 
         data && navigate('/')
     }

@@ -25,7 +25,7 @@ const Login = () => {
     if (!errors.email && !errors.password) {
       fetch('http://localhost:3001/login', {
         method: 'POST',
-        headers: {
+        headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
@@ -34,20 +34,23 @@ const Login = () => {
       .then(data => {
         if (data.errors) {
           setBackendError(data.errors);
-        } else {
+        } else if (data.token) {
           setBackendError(null);
           localStorage.setItem("token", data.token);
           navigate('/home');
+        } else {
+          setBackendError('Email ou mot de passe incorrect.');
         }
       })
       .catch(err => {
         console.log(err);
+        setBackendError('Une erreur est survenue. Veuillez réessayer.');
       });
     }
   };
 
   return (
-    <div className='flex items-center justify-center bg-blue-600 min-h-screen'>
+    <div className='flex items-center justify-center bg--600 min-h-screen'>
       <div className='bg-white p-8 rounded-lg shadow-lg w-96'>
         <h2 className='text-2xl font-semibold text-center text-gray-800 mb-6'>Login</h2>
         

@@ -28,20 +28,18 @@ db.connect(err => {
 });
 
 app.post('/signup', (req, res) => {
-  const sql = "INSERT INTO login(`name`, `email`, `password`, `token`) VALUES(?)";
-  const values = [
-    req.body.name,
-    req.body.email,
-    req.body.password,
-    '' 
-  ];
-  db.query(sql, [values], (err, data) => {
+  const { name, email, password } = req.body;
+  const sql = "INSERT INTO login (name, email, password, token) VALUES (?, ?, ?, ?)";
+  const values = [name, email, password, 'undefined'];  
+
+  db.query(sql, values, (err, result) => {
     if (err) {
-      return res.json({error: err });
+      return res.status(500).json({ error: err.message });
     }
-    return res.json({ success: 'Signed up with success !' });
+    res.status(201).json({ success: 'Utilisateur enregistré avec succès !' });
   });
 });
+
 
 app.get('/checkauth', verifyJwt, (req, res) => {
   return res.json("Authenticated");
@@ -51,7 +49,7 @@ app.post('/login', (req, res) => {
   const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
   db.query(sql, [req.body.email, req.body.password], (err, data) => {
     if (err) {
-      return res.json({ error: err });
+      return res.status(500).json({ error: err });
     }
     if (data.length > 0) {
       const id = data[0].id;
@@ -61,16 +59,29 @@ app.post('/login', (req, res) => {
       const updateTokenSql = "UPDATE login SET token = ? WHERE id = ?";
       db.query(updateTokenSql, [token, id], (err, updateResult) => {
         if (err) {
-          return res.json({ error: err });
+          return res.status(500).json({ error: err });
         }
         return res.json({ Login: true, token, data });
       });
     } else {
-      return res.json("User doesn't exist or incorrect password");
+      return res.status(401).json("User doesn't exist or incorrect password");
     }
   });
 });
 
+
+app.get('/search', (req, res) => {
+  const searchTerm = req.query.term;
+  const sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
+  const values = [`%${searchTerm}%`, `%${searchTerm}%`];
+  
+  db.query(sql, values, (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erreur lors de la recherche' });
+    }
+    return res.status(200).json(data);
+  });
+});
 
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM products"; 
@@ -81,51 +92,19 @@ app.get('/products', (req, res) => {
     return res.json(data);
   });
 });
-app.get('/search', (req, res) => {
-  const searchTerm = req.query.term;
-  const sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
-  const values = [`%${searchTerm}%`, `%${searchTerm}%`];
 
-  db.query(sql, values, (err, data) => {
+app.post("/products", (req, res) => {
+  const { name, price, description, image } = req.body;
+  const sql =
+    "INSERT INTO products (name, description, price, image) VALUES (? , ? , ?, ? )";
+  db.query(sql, [name, description, price, image], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: 'Erreur lors de la recherche' });
+      return res.status(500).json({ err });
+    } else {
+      return res.status(200).json(result);
     }
-    return res.status(200).json(data);
   });
 });
-
-// app.post('/products', (req, res) => {
-//   const sql = "INSERT INTO products(`name`, `description`, `prix`, `image`) VALUES(?)";
-//   const values = [
-//     req.body.name,
-//     description,
-//     prix,
-//     image
-//   ];
-//   db.query(sql, [values], (err, data) => {
-//     if (err) {
-//       return res.json("Error");
-//     }
-//     return res.json(data);
-//   });
-// });
-app.post("/createItem", (req, res) => {
-  const { name, prix, description, image} = req.body;
-  const sql =
-    "INSERT INTO products (name,description ,prix, image) VALUES (? , ? , ?, ? )";
-  db.query(
-    sql,
-    [name, description, prix, image],
-    (err, result) => {
-      if (err) {
-        return res.status(500).json({ err });
-      } else {
-        return res.status(200).json(result);
-      }
-    }
-  );
-});
-
 
 app.delete('/products/:id', (req, res) => {
   const sql = "DELETE FROM products WHERE id = ?";
@@ -138,32 +117,21 @@ app.delete('/products/:id', (req, res) => {
     return res.status(200).json("Product deleted");
   });
 });
-// app.put('/products/:id', (req, res) => { const sql = "UPDATE products SET name = ?, description = ?, prix = ?, image = ? WHERE id = ?"; 
-//   const values = [ name, description, prix, image, req.params.id ]; 
-//   db.query(sql, values, (err, data) => { 
-//     if (err) { console.error('Error updating data:', err); 
-//    return res.status(500).json("Error"); } 
-//    return res.status(200).json("Product updated"); }); });
-
- app.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`);
- });
-
 
 app.put("/products/:id", (req, res) => {
-  const { name,description, prix, image,  } = req.body;
+  const { name, description, price, image } = req.body;
   const { id } = req.params;
   const sql =
-    "UPDATE products SET name = ?, description = ?, prix = ?, image= ? , WHERE id = ?";
-  db.query(
-    sql,
-    [name,description, prix, image, id],
-    (err, result) => {
-      if (err) {
-        return res.status(500).json({ error: "ERREUR DU SERVEUR" });
-      } else {
-        return res.status(200).json(result);
-      }
+    "UPDATE products SET name = ?, description = ?, price = ?, image = ? WHERE id = ?";
+  db.query(sql, [name, description, price, image, id], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "ERREUR DU SERVEUR" });
+    } else {
+      return res.status(200).json(result);
     }
-  );
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
