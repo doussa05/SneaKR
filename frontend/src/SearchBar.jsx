@@ -26,7 +26,7 @@ const SearchBar = ({ setSearchResults }) => {
         />
         <button
           onClick={handleSearch}
-          className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-700"
+          className="p-2 bg-purple-500 text-white rounded-r-md hover:bg-cyan-400"
         >
           Rechercher
         </button>

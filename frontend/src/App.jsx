@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Login from './Login'; 
 import Footer from './Footer'; 
 import MyProfile from './MyProfile'; 
+import MyWishList from './MyWishList'; 
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/navbar" element={<NavBar />} /> 
         <Route path="/MyProfile" element={<MyProfile />} /> 
+        <Route path="/MyWishList" element={<MyWishList/>} /> 
         
       </Routes>
       <Footer/>

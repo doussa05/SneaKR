@@ -20,26 +20,27 @@ const Login = () => {
     setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!errors.email && !errors.password) {
       fetch('http://localhost:3001/login', {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
       })
       .then(response => response.json())
       .then(data => {
-        if (data.errors) {
-          setBackendError(data.errors);
+        if (data.error) {
+          setBackendError(data.error); // Afficher l'erreur spécifique
         } else if (data.token) {
           setBackendError(null);
           localStorage.setItem("token", data.token);
           navigate('/home');
         } else {
-          setBackendError('Email ou mot de passe incorrect.');
+          setBackendError('Une erreur est survenue. Veuillez réessayer.');
         }
       })
       .catch(err => {
@@ -48,6 +49,13 @@ const Login = () => {
       });
     }
   };
+  
+
+
+
+
+
+
 
   return (
     <div className='flex items-center justify-center bg--600 min-h-screen'>
