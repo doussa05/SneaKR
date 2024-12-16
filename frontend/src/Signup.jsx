@@ -38,7 +38,7 @@ function Signup() {
   return (
     <div className="flex items-center justify-center  min-h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Sign-Up</h2>
+        <h2 className="text-2xl font-semibold text-center text-violet-600 mb-6">Sign-Up</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -85,7 +85,7 @@ function Signup() {
 
           <button
             type="submit"
-            className="w-full py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="w-full py-3 bg-violet-600 text-white rounded-md hover:bg-cyan-400 f focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
           >
             Sign up
           </button>
@@ -97,7 +97,7 @@ function Signup() {
           <div className="flex items-center justify-center">
             <Link
               to="/"
-              className="mt-3 block text-center text-sm text-gray-600 border border-gray-300 rounded-md py-3 w-full hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+              className="mt-3 block text-center text-sm bg-violet-600 text-slate-100 border border-gray-300 rounded-md py-3 w-full hover:bg-cyan-400 focus:ring-2 focus:ring-blue-500 no-underline"
             >
               Log in
             </Link>

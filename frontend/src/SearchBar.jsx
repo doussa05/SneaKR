@@ -21,7 +21,7 @@ const SearchBar = ({ setSearchResults }) => {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Entrez le terme de recherche"
+          placeholder="Bonjour, que cherchez-vous aujourdhui ?"
           className="flex-grow p-2 border border-gray-300 rounded-l-md"
         />
         <button

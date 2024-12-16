@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <div className='flex items-center justify-center bg--600 min-h-screen'>
       <div className='bg-white p-8 rounded-lg shadow-lg w-96'>
-        <h2 className='text-2xl font-semibold text-center text-gray-800 mb-6'>Login</h2>
+        <h2 className='text-2xl font-semibold text-center  text-violet-600 mb-6'>Login</h2>
         
         <form onSubmit={handleSubmit} className='space-y-6'>
           <div>
@@ -91,7 +91,7 @@ const Login = () => {
             {errors.password && <span className='text-sm text-red-500'>{errors.password}</span>}
           </div>
 
-          <button type='submit' className='w-full py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-offset-2'>
+          <button type='submit' className='w-full py-3 bg-violet-600 text-white rounded-md hover:bg-cyan-400 focus:ring-2 focus:ring-green-500 focus:ring-offset-2'>
             Log in
           </button>
           

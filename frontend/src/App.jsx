@@ -7,11 +7,6 @@ import Login from './Login';
 import Footer from './Footer'; 
 import MyProfile from './MyProfile'; 
 import MyWishList from './MyWishList'; 
-
-
-
-
-
 import './App.css';
 
 function App() {

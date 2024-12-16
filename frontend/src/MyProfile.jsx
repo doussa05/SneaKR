@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { User } from 'lucide-react'; // Import de l'icône de profil
 import Loading from './Loading'; // Import du composant de chargement
 
 const MyProfile = () => {
   const [profile, setProfile] = useState({ name: '', email: '' });
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true); // Ajout de l'état de chargement
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const MyProfile = () => {
       if (!token) {
         console.error('No token found in localStorage.');
         setError('Utilisateur non authentifié.');
-        setLoading(false); // Arrêter le chargement
+        setLoading(false);
         return;
       }
 
@@ -43,7 +44,7 @@ const MyProfile = () => {
         setError('Erreur lors de la récupération des informations.');
       }
 
-      setLoading(false); // Arrêter le chargement après la récupération des données
+      setLoading(false);
     };
 
     fetchProfile();
@@ -55,19 +56,35 @@ const MyProfile = () => {
   };
 
   if (loading) {
-    return <Loading />; // Afficher le composant de chargement
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <Loading />;
   }
 
   return (
-    <div className="profile p-4">
-      <h1 className="text-2xl font-bold mb-4">Mon Profil</h1>
-      <p><strong>Nom :</strong> {profile.name}</p>
-      <p><strong>Email :</strong> {profile.email}</p>
-      <button onClick={handleLogout} className="btn btn-danger mt-4">Se Déconnecter</button>
+    <div className="min-h-screen flex flex-col">
+     
+      <main className="flex-grow p-2 flex flex-col items-center justify-center">
+        {error ? (
+          <div className="bg-white shadow-md rounded-md p-8 max-w-lg w-full h-80 flex flex-col justify-center items-center">
+            <p className="text-red-500">{error}</p>
+          </div>
+        ) : (
+          <div className="bg-white shadow-md rounded-md p-8 max-w-lg w-full h-80 flex flex-col justify-between">
+            <div className="flex items-center space-x-4 mb-6">
+              <User className="w-20 h-20 text-purple-500" /> {/* Icône de profil */}
+              <div>
+                <h2 className="text-lg font-bold">{profile.name}</h2>
+                <p className="text-sm text-gray-600">{profile.email}</p>
+              </div>
+            </div>
+            <button onClick={handleLogout} className="bg-red-500 text-white py-2 px-6 rounded-md mt-6">
+              Se Déconnecter
+            </button>
+          </div>
+        )}
+      </main>
+      <footer className="bg-purple-200 p-0.5 h-4 text-center flex items-center justify-center">
+        
+      </footer>
     </div>
   );
 };

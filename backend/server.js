@@ -67,17 +67,49 @@ app.post('/login', (req, res) => { const { email, password } = req.body;
           } 
            if (results.length === 0) { 
             return res.status(404).json({ message: 'Utilisateur non trouvé' }); 
-          } res.status(200).json(results[0]); }); });
+          } res.status(200).json(results[0]); 
+        }); 
+      });
          // Route pour ajouter un article à la wishlist 
-         app.post('/wishlist', verifyJwt, (req, res) => { const userId = req.user.id; const { name, image, id: productId } = req.body; if (!productId || !name || !image) { return res.status(400).json({ message: 'Product ID, name, and image are required' }); } const sql = 'INSERT INTO wishlist (id, name, image, user_id) VALUES (?, ?, ?, ?)'; db.query(sql, [productId, name, image, userId], (err, result) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json({ message: 'Article ajouté à la wishlist' }); }); });
+         app.post('/wishlist', verifyJwt, (req, res) => { 
+          const userId = req.user.id; const { name, image, id: productId } = req.body; 
+          if (!productId || !name || !image) { 
+            return res.status(400).json({ message: 'Product ID, name, and image are required' }); } 
+            const sql = 'INSERT INTO wishlist (id, name, image, user_id) VALUES (?, ?, ?, ?)'; db.query(sql, [productId, name, image, userId], (err, result) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json({ message: 'Article ajouté à la wishlist' }); }); });
           // Route pour récupérer les articles de la wishlist 
           app.get('/wishlist', verifyJwt, (req, res) => { const userId = req.user.id; const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; db.query(sql, [userId], (err, results) => { if (err) { console.error('Database error:', err); // Log plus détaillé
            return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json(results); }); });
           
 app.get('/wishlist', verifyJwt, (req, res) => { const userId = req.user.id; const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; db.query(sql, [userId], (err, results) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json(results); }); });
 // route la bare de recherche
-app.get('/search', (req, res) => { const searchTerm = req.query.term; const sql = 'SELECT * FROM products WHERE name LIKE ?'; db.query(sql, [`%${searchTerm}%`], (err, results) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json(results); }); });
-// routes des produits
+
+
+app.get('/search', (req, res) => { 
+
+  const searchTerm = req.query.term; 
+  const sql = 'SELECT * FROM products WHERE name LIKE ?'; 
+  db.query(sql, [`%${searchTerm}%`], (err, results) => { 
+    if (err) { 
+
+      console.error('Database error:', err); 
+      return res.status(500).json({ message: 'Erreur serveur' }); 
+    } 
+    
+    res.status(200).json(results); 
+ 
+  }); 
+  });
+
+
+
+
+
+
+
+
+
+
+
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM products"; 
   db.query(sql, (err, data) => {

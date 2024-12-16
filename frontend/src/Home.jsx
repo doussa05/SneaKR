@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import Product from './Product'; // Assure-toi que ce chemin est correct
 
 function Home() {
-  const navigate = useNavigate();
+ 
   const [products, setProducts] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -24,7 +23,7 @@ function Home() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">SneaKR</h1>
+    
       <SearchBar setSearchResults={setSearchResults} />
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

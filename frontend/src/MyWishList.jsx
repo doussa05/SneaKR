@@ -39,25 +39,26 @@ const MyWishlist = () => {
     fetchWishlist();
   }, []);
 
-  if (error) {
-    return <div className="error">{error}</div>;
-  }
-
   return (
-    <div className="wishlist">
-      <h1>Ma Wishlist</h1>
-      {wishlist.length === 0 ? (
-        <p>Aucun article dans la wishlist.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {wishlist.map((item, index) => (
-            <div key={`${item.id}-${index}`} className="p-4 bg-white shadow-md rounded-md">
-              <img src={item.image} alt={item.name} className="w-full h-48 object-cover mb-4" />
-              <h2 className="text-xl font-semibold">{item.name}</h2>
-            </div>
-          ))}
-        </div>
-      )}
+    <div className="min-h-screen flex flex-col">
+     
+      <main className="flex-grow p-1">
+        {error ? (
+          <div className="text-red-500">{error}</div>
+        ) : wishlist.length === 0 ? (
+          <p>Aucun article dans la wishlist.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {wishlist.map((item, index) => (
+              <div key={`${item.id}-${index}`} className="p-2 bg-white shadow-md rounded-md">
+                <img src={item.image} alt={item.name} className="w-full h-48 object-cover mb-2" />
+                <h2 className="text-sm font-semibold">{item.name}</h2>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+      
     </div>
   );
 };
