@@ -96,7 +96,7 @@ function Signup() {
 
           <div className="flex items-center justify-center">
             <Link
-              to="/"
+              to="/login"
               className="mt-3 block text-center text-sm bg-violet-600 text-slate-100 border border-gray-300 rounded-md py-3 w-full hover:bg-cyan-400 focus:ring-2 focus:ring-blue-500 no-underline"
             >
               Log in

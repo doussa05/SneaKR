@@ -22,7 +22,7 @@ export default function NavBar() {
    
             <Link to="/MyProfile" className="text-fuchsia-950 hover:text-white no-underline font-bold"> <User size={24} />  </Link>
             <Link to="/MyWishList" className="text-fuchsia-950 hover:text-white no-underline font-bold"> <Heart size={24} /> {/* Utilisation de l'icône Heart */}</Link> 
-            <Link to="/" className="text-fuchsia-950 hover:text-white font-bold no-underline"> <LogIn size={24} /> {/* Utilisation de l'icône LogIn */} </Link>
+            <Link to="/login" className="text-fuchsia-950 hover:text-white font-bold no-underline"> <LogIn size={24} /> {/* Utilisation de l'icône LogIn */} </Link>
           </div>
           <div className="-mr-2 flex md:hidden">
             <button onClick={toggleMenu} type="button" className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
@@ -44,7 +44,7 @@ export default function NavBar() {
           
           <Link to="/MyWishList" className="text-fuchsia-950 hover:text-white no-underline font-bold"> <Heart size={24} /> {/* Utilisation de l'icône Heart */}</Link> 
 
-          <Link to="/" className="text-fuchsia-950 hover:text-white font-bold no-underline"> <LogIn size={24} /> {/* Utilisation de l'icône LogIn */} </Link>
+          <Link to="/login" className="text-fuchsia-950 hover:text-white font-bold no-underline"> <LogIn size={24} /> {/* Utilisation de l'icône LogIn */} </Link>
         </div>
       </div>
     </nav>

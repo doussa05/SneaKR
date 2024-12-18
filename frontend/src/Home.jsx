@@ -22,6 +22,7 @@ function Home() {
   }, []);
 
   return (
+   
     <div className="p-4">
     
       <SearchBar setSearchResults={setSearchResults} />
@@ -31,6 +32,7 @@ function Home() {
           <Product key={product.id} product={product} />
         ))}
       </div>
+
     </div>
   );
 }
