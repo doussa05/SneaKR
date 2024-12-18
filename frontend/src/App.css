@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Ajouter ces styles dans ton fichier CSS */
+.aspect-w-1 {
+    aspect-ratio: 1 / 1;
+  }
+  
+  .aspect-w-16 {
+    aspect-ratio: 16 / 9;
+  }
+  

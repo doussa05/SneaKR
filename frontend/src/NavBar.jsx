@@ -15,7 +15,7 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0    " >
-            <Link to="/" className="text-3xl font-bold  text-fuchsia-950 hover:text-slate-700">Anisus</Link>
+            <Link to="/home" className="text-3xl font-bold  text-fuchsia-950 hover:text-slate-700">Anisus</Link>
           </div>
           <div className="hidden md:flex items-center space-x-4 ">
           <Link to="/home" className="text-fuchsia-950 hover:text-white font-bold no-underline"> <Home size={24} /> {/* Utilisation de l'icône Home */} </Link>

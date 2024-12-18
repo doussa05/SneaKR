@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Heart } from 'lucide-react'; // Import de l'icône Heart depuis Lucide
 
 const Product = ({ product }) => {
+  const navigate = useNavigate();
+
   const handleAddToWishlist = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -30,13 +34,22 @@ const Product = ({ product }) => {
     }
   };
 
+  const handleViewDetails = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
     <div className="product p-4 bg-white shadow-md rounded-md">
       <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4" />
       <h2 className="text-xl font-semibold">{product.name}</h2>
       <p className="text-gray-700">{product.description}</p>
       <p className="text-green-600 font-bold">${product.price}</p>
-      <button onClick={handleAddToWishlist} className=" text-white font-bold py-2 px-4 rounded-full shadow-lg bg-purple-500 hover:bg-cyan-400">Add to Wishlist</button>
+      <div className="flex justify-between items-center mt-4">
+        <button onClick={handleViewDetails} className="bg-purple-500 hover:text-cyan-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-400">Voir les Détails</button> <br></br>
+        <button onClick={handleAddToWishlist} className="text-purple-500 hover:bg-cyan-400 ">
+          <Heart size={24} />
+        </button>
+      </div>
     </div>
   );
 };

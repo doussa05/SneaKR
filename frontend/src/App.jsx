@@ -7,6 +7,7 @@ import Login from './Login';
 import Footer from './Footer'; 
 import MyProfile from './MyProfile'; 
 import MyWishList from './MyWishList'; 
+import ProductDetail from './ProductDetail';
 import './App.css';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Route path="/navbar" element={<NavBar />} /> 
         <Route path="/MyProfile" element={<MyProfile />} /> 
         <Route path="/MyWishList" element={<MyWishList/>} /> 
-        
+        <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
       <Footer/>
     </Router>

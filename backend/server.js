@@ -104,7 +104,21 @@ app.get('/search', (req, res) => {
 
 
 
+  const products = [ { id: 2, name: 'New Balance 574', description: 'Chaussures de course légères', price: 90, image: 'https://img01.ztat.net/article/spp-media-p1/df9f7e558e9f41b39fef959e5dec8394/f262df9286984dd097140845a9d8f238.jpg?imwidth=1800' },
+    { id: 4, name: 'Nike Air Max 90', description: 'Confort et style avec une semelle Air', price: 120, image: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRp3vOsdsAFljauvLhWkQRORzwEgeA7BiFiuUP_n_3DMu2eRcUsNut7hX0br5wnGVyN1W8_7AvB-mfPZeO-g7ntY_7CBDVJm-kaHnXfUrkU5X65y7f3tmdqPAcjaKYHGzF2_q25mNE&usqp=CAc' },
+    { id: 5, name: 'Adidas Ultra Boost', description: 'Confort exceptionnel avec la technologie Boost', price: 180, image: 'https://img01.ztat.net/article/spp-media-p1/728312b2566841beb7d88989b3cb378d/a045a17fb1c94497973e6a19524bf427.jpg?imwidth=1800' },
+    { id:6 , name: 'Reebok Classic Leather', description: 'Design rétro et confortable', price: 85, image: 'https://i8.amplience.net/i/jpl/jd_708403_b?qlt=92&w=950&h=673&v=1&fmt=auto' },
+    { id: 7, name: 'Vans Old Skool', description: 'Style décontracté avec une touche de skate', price: 70, image: 'https://img01.ztat.net/article/spp-media-p1/7cd236bd94d1450aa14b2bd2476cf92d/32cfed082e7e4a25be18f783646c760a.jpg?imwidth=1800' },
+    { id: 8, name: 'Nike SB Dunk Low', description: 'Chaussure de skate iconique', price: 110, image: 'https://img01.ztat.net/article/spp-media-p1/111e0630f197433b899fe4927923c623/65f2a02ab9ce4c88bb890283c7e8d102.jpg?imwidth=1800' },
+    { id: 9, name: 'Asics Gel Lyte III', description: 'Confort avec la technologie Gel et design vintage', price: 100, image: 'https://img01.ztat.net/article/spp-media-p1/80639d5cd9914c3ea80d591ba30d8d81/6d414a13ec514c7caa9bbbc084025e2c.jpg?imwidth=1800' },
+    { id: 10, name: 'Adidas Stan Smith', description: 'Classique et minimaliste', price: 85, image: 'https://img01.ztat.net/article/spp-media-p1/3a2eda6b4fab48f299d1b37f4bc56fbc/459f24c1ff0f4adfa06aeb88c3012ca2.jpg?imwidth=1800' },
+    { id: 12, name: 'Saucony Jazz Original', description: 'Confort et performance pour les coureurs', price: 95, image: 'https://img01.ztat.net/article/spp-media-p1/1b42e133518c4676a505f1ba0c3abb28/69e5cc958d6547d39e21cf0f0b09653b.jpg?imwidth=1800' },
+    { id: 13, name: 'Under Armour Curry One',description:'Chaussure de performance inspirée par le basket-ball', price: 130, image: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRsOuKAwupLTx2X3AWEholRdpNyy_GCSKnqLdBFtKTSqPxYUUbmmYR81gHcqEcH-j0WNXaAUuG6tcCMD9_16qEH4yTdybgxy_v3-LQkTFiReSYIZ9vczX-thGuE6IFeHbwDJlGPmjaRlA&usqp=CAc' },
+    { id: 14, name: 'FILA Disruptor 2',description:'Design rétro et moderne avec une semelle épaisse', price: 80, image: 'https://img01.ztat.net/article/spp-media-p1/f86e39b0f11e4d17ae1e6216491f7fe5/c5e8cd5be3a54a9aae0d59476ee40daf.jpg?imwidth=1800' },
+    { id: 15, name: 'Converse Chuck Taylor',description:'Iconique et polyvalente', price: 61, image: 'https://img01.ztat.net/article/spp-media-p1/01c896b091984fc2bb2dc9b84313eb36/6f01d0ab5a65414faf625d8bac3d34b1.jpg?imwidth=1800' },
 
+   ]; 
+   app.get('/products/:id', (req, res) => { const product = products.find(p => p.id === parseInt(req.params.id)); if (product) { res.json(product); } else { res.status(404).json({ error: 'Product not found' }); } });
 
 
 
