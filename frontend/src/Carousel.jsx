@@ -11,7 +11,7 @@ const Carousel = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1500, // Vitesse de défilement augmentée à 1.5 secondes
+    autoplaySpeed: 1500,
     arrows: false,
     appendDots: dots => (
       <div style={{ position: 'absolute', bottom: '10px', left: '50%', transform: 'translateX(-50%)' }}>

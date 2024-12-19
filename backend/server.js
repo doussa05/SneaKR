@@ -48,13 +48,31 @@ app.get('/checkauth', verifyJwt, (req, res) => {
 // Route de connexion 
 app.post('/login', (req, res) => { const { email, password } = req.body; 
 //Vérification de l'existence de l'email 
- const sqlEmail = 'SELECT * FROM login WHERE email = ?'; db.query(sqlEmail, [email], (err, results) => { if (err) { console.error('Database error:', err); return res.status(500).json({ error: 'Erreur serveur' }); } if (results.length === 0) { return res.status(400).json({ error: 'Le compte n\'existe pas' }); } const user = results[0]; 
+ const sqlEmail = 'SELECT * FROM login WHERE email = ?'; 
+ db.query(sqlEmail, [email], (err, results) => { 
+  if (err) { console.error('Database error:', err);
+     return res.status(500).json({ error: 'Erreur serveur' }); 
+    } if (results.length === 0) { 
+      return res.status(400).json({ error: 'Le compte n\'existe pas' }); 
+    }
+     const user = results[0]; 
  // Vérification du mot de passe
    if (password !== user.password) { 
-    // Si tu utilises un hash pour les mots de passe, remplace par bcrypt.compare 
-     return res.status(400).json({ error: 'Mot de passe incorrect' }); } const id = user.id; const token = jwt.sign({ id }, "jwtSecretKey", { expiresIn: '1h' });
+    
+     return res.status(400).json({ error: 'Mot de passe incorrect' }); 
+    }
+     const id = user.id; 
+     const token = jwt.sign({ id }, "jwtSecretKey", { expiresIn: '1h' });
       // Mise à jour du token dans la base de données 
-       const updateTokenSql = "UPDATE login SET token = ? WHERE id = ?"; db.query(updateTokenSql, [token, id], (err, updateResult) => { if (err) { console.error('Database error:', err); return res.status(500).json({ error: 'Erreur serveur' }); } return res.status(200).json({ Login: true, token, user }); }); }); });
+       const updateTokenSql = "UPDATE login SET token = ? WHERE id = ?"; 
+       db.query(updateTokenSql, [token, id], (err, updateResult) => { 
+        if (err) { console.error('Database error:', err); 
+          return res.status(500).json({ error: 'Erreur serveur' });
+         } 
+         return res.status(200).json({ Login: true, token, user });
+         }); 
+        });
+       });
 // Route pour récupérer les informations du profil
   app.get('/myprofile', verifyJwt, (req, res) => { 
     const userId = req.user.id; 
@@ -75,12 +93,33 @@ app.post('/login', (req, res) => { const { email, password } = req.body;
           const userId = req.user.id; const { name, image, id: productId } = req.body; 
           if (!productId || !name || !image) { 
             return res.status(400).json({ message: 'Product ID, name, and image are required' }); } 
-            const sql = 'INSERT INTO wishlist (id, name, image, user_id) VALUES (?, ?, ?, ?)'; db.query(sql, [productId, name, image, userId], (err, result) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json({ message: 'Article ajouté à la wishlist' }); }); });
+            const sql = 'INSERT INTO wishlist (id, name, image, user_id) VALUES (?, ?, ?, ?)'; 
+            db.query(sql, [productId, name, image, userId], (err, result) => { 
+              if (err) { console.error('Database error:', err); 
+                return res.status(500).json({ message: 'Erreur serveur' }); 
+              } 
+              res.status(200).json({ message: 'Article ajouté à la wishlist' }); 
+            }); 
+          });
           // Route pour récupérer les articles de la wishlist 
-          app.get('/wishlist', verifyJwt, (req, res) => { const userId = req.user.id; const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; db.query(sql, [userId], (err, results) => { if (err) { console.error('Database error:', err); // Log plus détaillé
-           return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json(results); }); });
+          app.get('/wishlist', verifyJwt, (req, res) => { 
+            const userId = req.user.id; 
+            const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; 
+            db.query(sql, [userId], (err, results) => { if (err) {
+               console.error('Database error:', err); 
+           return res.status(500).json({ message: 'Erreur serveur' }); 
+          } res.status(200).json(results); 
+        });
+         });
           
-app.get('/wishlist', verifyJwt, (req, res) => { const userId = req.user.id; const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; db.query(sql, [userId], (err, results) => { if (err) { console.error('Database error:', err); return res.status(500).json({ message: 'Erreur serveur' }); } res.status(200).json(results); }); });
+app.get('/wishlist', verifyJwt, (req, res) => {
+   const userId = req.user.id; const sql = 'SELECT id, name, image FROM wishlist WHERE user_id = ?'; 
+   db.query(sql, [userId], (err, results) => { if (err) { 
+    console.error('Database error:', err);
+     return res.status(500).json({ message: 'Erreur serveur' }); 
+    } res.status(200).json(results); 
+  }); 
+});
 // route la bare de recherche
 
 
@@ -118,11 +157,17 @@ app.get('/search', (req, res) => {
     { id: 15, name: 'Converse Chuck Taylor',description:'Iconique et polyvalente', price: 61, image: 'https://img01.ztat.net/article/spp-media-p1/01c896b091984fc2bb2dc9b84313eb36/6f01d0ab5a65414faf625d8bac3d34b1.jpg?imwidth=1800' },
 
    ]; 
-   app.get('/products/:id', (req, res) => { const product = products.find(p => p.id === parseInt(req.params.id)); if (product) { res.json(product); } else { res.status(404).json({ error: 'Product not found' }); } });
+   app.get('/products/:id', (req, res) => { 
+    const product = products.find(p => p.id === parseInt(req.params.id)); 
+    if (product) { res.json(product); } 
+    else {
+       res.status(404).json({ error: 'Product not found' });
+       }
+       });
 
 
 
-
+// route pour les produits
 
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM products"; 

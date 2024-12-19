@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart } from 'lucide-react'; // Import de l'icône Heart depuis Lucide
+import { Heart } from 'lucide-react'; 
 
 const Product = ({ product }) => {
   const navigate = useNavigate();

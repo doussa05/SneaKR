@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
-import Product from './Product'; // Assure-toi que ce chemin est correct
+import Product from './Product';
 
 function Home() {
  

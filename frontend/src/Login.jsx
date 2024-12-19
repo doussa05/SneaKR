@@ -33,7 +33,7 @@ const Login = () => {
       .then(response => response.json())
       .then(data => {
         if (data.error) {
-          setBackendError(data.error); // Afficher l'erreur spécifique
+          setBackendError(data.error); 
         } else if (data.token) {
           setBackendError(null);
           localStorage.setItem("token", data.token);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User } from 'lucide-react'; // Import de l'icône de profil
-import Loading from './Loading'; // Import du composant de chargement
+import { User } from 'lucide-react'; 
+import Loading from './Loading'; 
 
 const MyProfile = () => {
   const [profile, setProfile] = useState({ name: '', email: '' });
@@ -52,7 +52,7 @@ const MyProfile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Supprime le token du localStorage
-    navigate('/'); // Redirige vers la page de connexion
+    navigate('/login'); 
   };
 
   if (loading) {
@@ -70,7 +70,7 @@ const MyProfile = () => {
         ) : (
           <div className="bg-white shadow-md rounded-md p-8 max-w-lg w-full h-80 flex flex-col justify-between">
             <div className="flex items-center space-x-4 mb-6">
-              <User className="w-20 h-20 text-purple-500" /> {/* Icône de profil */}
+              <User className="w-20 h-20 text-purple-500" /> 
               <div>
                 <h2 className="text-lg font-bold">{profile.name}</h2>
                 <p className="text-sm text-gray-600">{profile.email}</p>

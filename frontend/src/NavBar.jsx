@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, LogIn, Home, Heart } from 'lucide-react'; // Importation des icônes User, LogIn, Home et Heart
+import { User, LogIn, Home, Heart } from 'lucide-react'; 
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
