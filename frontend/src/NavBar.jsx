@@ -10,23 +10,23 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-purple-200 ">
+    <nav className="bg-orange-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/home" className="text-3xl font-bold text-fuchsia-950 hover:text-slate-700">Anisus</Link>
+            <Link to="/home" className="text-3xl font-bold text-orange-950 hover:text-slate-700">Anisus</Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/home" className="text-fuchsia-950 hover:text-white font-bold no-underline">
+            <Link to="/home" className="text-orange-950 hover:text-white font-bold no-underline">
               <Home size={24} />
             </Link>
-            <Link to="/MyProfile" className="text-fuchsia-950 hover:text-white no-underline font-bold">
+            <Link to="/MyProfile" className="text-orange-950 hover:text-white no-underline font-bold">
               <User size={24} />
             </Link>
-            <Link to="/MyWishList" className="text-fuchsia-950 hover:text-white no-underline font-bold">
+            <Link to="/MyWishList" className="text-orange-950 hover:text-white no-underline font-bold">
               <Heart size={24} />
             </Link>
-            <Link to="/login" className="text-fuchsia-950 hover:text-white font-bold no-underline">
+            <Link to="/login" className="text-orange-950 hover:text-white font-bold no-underline">
               <LogIn size={24} />
             </Link>
           </div>
@@ -43,16 +43,16 @@ export default function NavBar() {
 
       <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to="/home" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-fuchsia-950 hover:text-white">
+          <Link to="/home" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-orange-950 hover:text-white">
             <Home size={24} />
           </Link>
-          <Link to="/MyProfile" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-fuchsia-950 hover:text-white">
+          <Link to="/MyProfile" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-orange-950 hover:text-white">
             <User size={24} />
           </Link>
-          <Link to="/MyWishList" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-fuchsia-950 hover:text-white">
+          <Link to="/MyWishList" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-orange-950 hover:text-white">
             <Heart size={24} />
           </Link>
-          <Link to="/login" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-fuchsia-950 hover:text-white">
+          <Link to="/login" className="block px-3 py-2 rounded-md text-base font-bold no-underline text-orange-950 hover:text-white">
             <LogIn size={24} />
           </Link>
         </div>

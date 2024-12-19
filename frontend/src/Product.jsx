@@ -45,8 +45,8 @@ const Product = ({ product }) => {
       <p className="text-gray-700">{product.description}</p>
       <p className="text-green-600 font-bold">${product.price}</p>
       <div className="flex justify-between items-center mt-4">
-        <button onClick={handleViewDetails} className="bg-purple-500 hover:text-cyan-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-400">Voir les Détails</button> <br></br>
-        <button onClick={handleAddToWishlist} className="text-purple-500 hover:bg-cyan-400 ">
+        <button onClick={handleViewDetails} className="bg-orange-500 hover:text-cyan-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-blue-400">Voir les Détails</button> <br></br>
+        <button onClick={handleAddToWishlist} className="text-orange-500 hover:bg-cyan-400">
           <Heart size={24} />
         </button>
       </div>
